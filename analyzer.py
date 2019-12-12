@@ -40,23 +40,26 @@ def main():
     coding_sessions = []
 
     session_start = compile_times[0]
-    prev_compile_time = session_start + datetime.timedelta(minutes=25)
+    prev_compile_time = session_start + datetime.timedelta(minutes=10)
 
     for i in range(1, len(compile_times)):
         curr_compile_time = compile_times[i]
-        if curr_compile_time - prev_compile_time > datetime.timedelta(hours=1):
+        # if you took a 1 hour 45 minute break or so between compiles we consider that a long enough
+        # break to split it into two sessions
+        if curr_compile_time - prev_compile_time > datetime.timedelta(hours=1.75):
             if session_start == prev_compile_time:
                 # assume a ~20 minute session if we only compiled once
-                coding_sessions.append(datetime.timedelta(minutes=25))
+                coding_sessions.append(datetime.timedelta(minutes=10))
             else:
                 # assume you worked ~10 minutes before your first compile
-                coding_sessions.append(prev_compile_time - (session_start - datetime.timedelta(minutes=15)))
+                coding_sessions.append(prev_compile_time - (session_start - datetime.timedelta(minutes=10)))
             session_start = curr_compile_time
         prev_compile_time = curr_compile_time
+    # add the last session to our list
+    coding_sessions.append(prev_compile_time - (session_start - datetime.timedelta(minutes=10)))
 
     total_time = datetime.timedelta()
     for session in coding_sessions:
-        print(session)
         total_time += session
 
     print(f"Total time spent coding: {total_time} ({total_time.total_seconds() / 3600:.2f} hours)")
