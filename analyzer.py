@@ -1,6 +1,12 @@
 """Analyze time spent on a project using git tags."""
 
 import sys
+import datetime
+
+
+def get_datetime(date_str):
+    """Convert compilation git tag to the date and time of the compilation."""
+    return datetime.datetime.strptime(date_str, 'compile-%Y.%m.%d_%H.%M.%S')
 
 
 def main():
@@ -17,7 +23,11 @@ def main():
         sys.exit(1)
 
     for line in tag_file:
-        if not line.startswith("compile-") and not line.startswith("submission-"):
+        if line.startswith("compile-"):
+            compile_time = get_datetime(line.strip())
+        elif line.startswith("submission-"):
+            pass
+        elif line != "":
             print(f"{filename} isn't in the correct format. Try again.")
             print(line)
             sys.exit(1)
