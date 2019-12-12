@@ -40,17 +40,17 @@ def main():
     coding_sessions = []
 
     session_start = compile_times[0]
-    prev_compile_time = session_start + datetime.timedelta(minutes=20)
+    prev_compile_time = session_start + datetime.timedelta(minutes=25)
 
     for i in range(1, len(compile_times)):
         curr_compile_time = compile_times[i]
         if curr_compile_time - prev_compile_time > datetime.timedelta(hours=1):
             if session_start == prev_compile_time:
                 # assume a ~20 minute session if we only compiled once
-                coding_sessions.append(datetime.timedelta(minutes=20))
+                coding_sessions.append(datetime.timedelta(minutes=25))
             else:
                 # assume you worked ~10 minutes before your first compile
-                coding_sessions.append(prev_compile_time - (session_start - datetime.timedelta(minutes=10)))
+                coding_sessions.append(prev_compile_time - (session_start - datetime.timedelta(minutes=15)))
             session_start = curr_compile_time
         prev_compile_time = curr_compile_time
 
