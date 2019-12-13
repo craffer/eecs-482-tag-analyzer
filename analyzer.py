@@ -41,12 +41,13 @@ def main():
 
     session_start = compile_times[0]
     prev_compile_time = session_start + datetime.timedelta(minutes=10)
-
+    max_break = datetime.timedelta()
     for i in range(1, len(compile_times)):
         curr_compile_time = compile_times[i]
         # if you took a 1 hour 45 minute break or so between compiles we consider that a long enough
         # break to split it into two sessions
         if curr_compile_time - prev_compile_time > datetime.timedelta(hours=1.75):
+            max_break = max(max_break, curr_compile_time - prev_compile_time)
             if session_start == prev_compile_time:
                 # assume a ~20 minute session if we only compiled once
                 coding_sessions.append(datetime.timedelta(minutes=10))
@@ -62,6 +63,8 @@ def main():
     max_time = max(coding_sessions)
 
     print(f"Total time spent coding: {total_time} ({total_time.total_seconds() / 3600:.2f} hours)")
+    print(f"Max time spent coding in a single session: {max_time} ({max_time.total_seconds() / 3600:.2f} hours)")
+    print(f"Max time spent between sessions: {max_break} ({max_break.total_seconds() / 3600:.2f} hours)")
 
 
 if __name__ == "__main__":
