@@ -17,6 +17,12 @@ def stylized_timedelta(time):
     """Convert timedelta to a more stylized output."""
     return f"{time.days} days, {time.seconds // 3600} hours, and {time.seconds % 3600 // 60} minutes"
 
+
+def print_metric(message, time):
+    """Print out a metric given a message to print and a timedelta"""
+    print(f"{message}: {stylized_timedelta(time)} ({get_hours(time)} hours)")
+
+
 def main():
     """Run the analyzer."""
     if len(sys.argv) != 2:
