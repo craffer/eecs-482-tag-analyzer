@@ -19,9 +19,7 @@ def stylized_timedelta(time):
     return f"{time.days} days, {time.seconds // 3600} hours, and {time.seconds % 3600 // 60} minutes"
 
 
-def print_metric(message, time):
-    """Print out a metric given a message to print and a timedelta"""
-    print(f"{message}: {stylized_timedelta(time)} ({get_hours(time)} hours)")
+    """Print out a metric given a message to print and a timedelta."""
 
 
 def main():
@@ -60,7 +58,7 @@ def main():
     max_break = datetime.timedelta()
     for i in range(1, len(compile_times)):
         curr_compile_time = compile_times[i]
-        # if you took a 1 hour 45 minute break or so between compiles we consider that a long enough
+        # if you took a 1 hour 45 minute break or so between compiles we consider that a big enough
         # break to split it into two sessions (this is very arbitrary)
         if curr_compile_time - prev_compile_time > datetime.timedelta(hours=1.75):
             max_break = max(max_break, curr_compile_time - prev_compile_time)
@@ -70,7 +68,8 @@ def main():
             else:
                 # assume you worked ~10 minutes before your first compile and your last compile
                 # signifies the end of your session
-                coding_sessions.append(prev_compile_time - (session_start - datetime.timedelta(minutes=10)))
+                coding_sessions.append(prev_compile_time -
+                                       (session_start - datetime.timedelta(minutes=10)))
             session_start = curr_compile_time
         prev_compile_time = curr_compile_time
     # add the last session to our list
