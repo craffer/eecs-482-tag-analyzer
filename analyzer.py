@@ -58,7 +58,8 @@ def main():
                 # assume a ~20 minute session if we only compiled once
                 coding_sessions.append(datetime.timedelta(minutes=20))
             else:
-                # assume you worked ~10 minutes before your first compile
+                # assume you worked ~10 minutes before your first compile and your last compile
+                # signifies the end of your session
                 coding_sessions.append(prev_compile_time - (session_start - datetime.timedelta(minutes=10)))
             session_start = curr_compile_time
         prev_compile_time = curr_compile_time
