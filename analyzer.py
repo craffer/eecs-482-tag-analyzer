@@ -16,10 +16,16 @@ def get_hours(time):
 
 def stylized_timedelta(time):
     """Convert timedelta to a more stylized output."""
-    return f"{time.days} days, {time.seconds // 3600} hours, and {time.seconds % 3600 // 60} minutes"
+    return f"{time.days} days, {time.seconds // 3600} hours, " +\
+           f"and {time.seconds % 3600 // 60} minutes"
 
 
+def print_metric(message, time, just_hours=False):
     """Print out a metric given a message to print and a timedelta."""
+    if (just_hours):
+        print(f"{message}: {get_hours(time)} hours")
+    else:
+        print(f"{message}: {stylized_timedelta(time)} ({get_hours(time)} hours)")
 
 
 def main():
@@ -82,13 +88,12 @@ def main():
     total_elapsed = compile_times[-1] - compile_times[0]
     percent_coding = total_elapsed / total_time
 
-    # I think the output is easier to read in bash if there is a newline before and after
+    print_metric("\nTotal time spent coding", total_time)
     print("")
-    print_metric("Total time spent coding", total_time)
-    print_metric("Max time spent coding", max_time)
-    print_metric("Mean time spent coding per session", mean_time)
-    print_metric("Median time spent coding per session", median_time)
-    print_metric("Max time spent between sessions", max_break)
+    print_metric("Longest coding session", max_time, True)
+    print_metric("Mean time spent coding per session", mean_time, True)
+    print_metric("Median time spent coding per session", median_time, True)
+    print_metric("Longest break between sessions", max_break)
     print_metric("Total time between start/end of project", total_elapsed)
     print(f"Percentage of your life spent coding while this project was out: {percent_coding:.2f}%\n")
 
