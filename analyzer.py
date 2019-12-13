@@ -10,7 +10,7 @@ def get_datetime(date_str):
 
 
 def get_hours(time):
-    """Convert datetime object to number of hours, rounded to 2 decimal places."""
+    """Convert timedelta object to number of hours, rounded to 2 decimal places."""
     return format(time.total_seconds() / 3600, '.2f')
 
 
