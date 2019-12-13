@@ -45,7 +45,7 @@ def main():
     for i in range(1, len(compile_times)):
         curr_compile_time = compile_times[i]
         # if you took a 1 hour 45 minute break or so between compiles we consider that a long enough
-        # break to split it into two sessions
+        # break to split it into two sessions (this is very arbitrary)
         if curr_compile_time - prev_compile_time > datetime.timedelta(hours=1.75):
             max_break = max(max_break, curr_compile_time - prev_compile_time)
             if session_start == prev_compile_time:
