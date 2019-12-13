@@ -4,7 +4,7 @@ Perform an analysis of git tags for EECS 482 projects to determine the amount of
 
 ## Usage
 
-Run `python3 analyzer.py GIT_REPO` using a link to a repo the user has access to and has a tag for each compilation. For example, for statistics on EECS 482 Project 2, the user would run:
+Run `python3 analyzer.py GIT_REPO` using a link to a repo containing a tag for each compilation. The user must also have access to this repo. For example, for statistics on EECS 482 Project 2, the user would run:
 
 ```bash
 python3 analyzer.py git@github.com:eecs482/uniqname1.uniqname2.uniqname3.2
