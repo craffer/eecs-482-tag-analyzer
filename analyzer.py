@@ -58,9 +58,8 @@ def main():
     # add the last session to our list
     coding_sessions.append(prev_compile_time - (session_start - datetime.timedelta(minutes=10)))
 
-    total_time = datetime.timedelta()
-    for session in coding_sessions:
-        total_time += session
+    total_time = sum(coding_sessions, datetime.timedelta())
+    max_time = max(coding_sessions)
 
     print(f"Total time spent coding: {total_time} ({total_time.total_seconds() / 3600:.2f} hours)")
 
