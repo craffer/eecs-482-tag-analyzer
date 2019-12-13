@@ -69,6 +69,10 @@ def main():
     compile_times = sorted(compile_times)
     coding_sessions = []
 
+    if len(compile_times) == 0:
+        print(f"Something went wrong. Try again.")
+        sys.exit(1)
+
     session_start = compile_times[0]
     prev_compile_time = session_start
     max_break = datetime.timedelta()
