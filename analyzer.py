@@ -4,6 +4,15 @@ import sys
 import subprocess
 import re
 import datetime
+import argparse
+
+
+def get_repo():
+    """Parse the desired repo from command line arguments."""
+    parser = argparse.ArgumentParser(description="Analyze compilation tags from a remote git repo.")
+    parser.add_argument('repo_url', help="remote URL of git repo you want to analyze")
+    args = parser.parse_args()
+    return args.repo_url
 
 
 def get_datetime(line):
@@ -36,11 +45,8 @@ def print_metric(message, time, just_hours=False):
 
 def main():
     """Run the analyzer."""
-    if len(sys.argv) != 2:
-        print(f"Usage: python3 {sys.argv[0]} REPO_LINK")
-        sys.exit(1)
+    repo = get_repo()
 
-    repo = sys.argv[1]
     fetch_tags = ["git", "ls-remote", "--tags", repo]
     command_result = subprocess.run(fetch_tags, capture_output=True, text=True)
     if command_result.returncode != 0:
