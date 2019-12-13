@@ -18,7 +18,7 @@ A list of chronological compile tags are gathered and analyzed in an attempt to 
 
 When comparing time between compiles we assume that a gap of 1.75 hours or more implies that a group took a break from coding, signifying different sessions. Using this method to seperate compile tags by "session" we can compare the first timestamp with the last timestamp in a session to get the elapsed time spent coding.
 
-## Assumptions We Make About Sessions
+### Assumptions We Make
 
 1. Any gap between compiles that measures 1 hours and 45 minutes or greater signifies two seperate coding sessions. This is probably our largest assumption and tends to have the greatest effect on estimated time your group spent. Feel free to tweak this number to fit your personal experience.
 
