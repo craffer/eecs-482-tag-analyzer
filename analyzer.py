@@ -9,6 +9,11 @@ def get_datetime(date_str):
     return datetime.datetime.strptime(date_str, 'compile-%Y.%m.%d_%H.%M.%S')
 
 
+def get_hours(time):
+    """Convert datetime object to number of hours, rounded to 2 decimal places."""
+    return format(time.total_seconds() / 3600, '.2f')
+
+
 def main():
     """Run the analyzer."""
     if len(sys.argv) != 2:
