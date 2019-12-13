@@ -95,7 +95,8 @@ def main():
     print_metric("Median time spent coding per session", median_time, True)
     print_metric("Longest break between sessions", max_break)
     print_metric("Total time between start/end of project", total_elapsed)
-    print(f"Percentage of your life spent coding while this project was out: {percent_coding:.2f}%\n")
+    print(f"Percentage of your life spent coding in between when you started and when you " +
+          f"finished: {percent_coding:.2f}%\n")
 
 
 if __name__ == "__main__":
