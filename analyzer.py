@@ -81,12 +81,15 @@ def main():
     median_time = sorted(coding_sessions.copy())[len(coding_sessions) // 2]
     total_elapsed = compile_times[-1] - compile_times[0]
 
-    print(f"\nTotal time spent coding: {total_time} ({get_hours(total_time)} hours)")
-    print(f"Max time spent coding in a single session: {max_time} ({get_hours(max_time)} hours)")
-    print(f"Mean time spent coding per session: {mean_time} ({get_hours(mean_time)} hours)")
-    print(f"Median time spent coding per session: {median_time} ({get_hours(median_time)} hours)")
-    print(f"Max time spent between sessions: {max_break} ({get_hours(max_break)} hours)")
-    print(f"Total time between start and end of project: {total_elapsed} ({get_hours(total_elapsed)} hours)\n")
+    # I think the output is easier to read in bash if there is a newline before and after
+    print("")
+    print_metric("Total time spent coding", total_time)
+    print_metric("Max time spent coding", max_time)
+    print_metric("Mean time spent coding per session", mean_time)
+    print_metric("Median time spent coding per session", median_time)
+    print_metric("Max time spent between sessions", max_break)
+    print_metric("Total time between start/end of project", total_elapsed)
+    print("")
 
 
 if __name__ == "__main__":
