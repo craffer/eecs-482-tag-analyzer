@@ -14,7 +14,7 @@ The user must have Python 3.7 installed on their machine.
 
 ## How It Works
 
-A list of chronological compile tags are gathered and analyzed in an attempt to piece together how long a group worked on a project. We compare the time delta between compile tag timestamps to try and determine the length of a "session." We define a session as a (mostly) uninterrupted portion of time that a group spent coding. 
+A list of chronological compile tags are gathered and analyzed in an attempt to piece together how long a group worked on a project. We compare the time delta between compile tag timestamps to try and determine the length of a "session." We define a session as a (mostly) uninterrupted portion of time that a group spent coding.
 
 When comparing time between compiles we assume that a gap of 1.75 hours or more implies that a group took a break from coding, signifying different sessions. Using this method to seperate compile tags by "session" we can compare the first timestamp with the last timestamp in a session to get the elapsed time spent coding.
 
