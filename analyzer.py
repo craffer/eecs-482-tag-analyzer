@@ -13,6 +13,9 @@ def get_hours(time):
     """Convert timedelta object to number of hours, rounded to 2 decimal places."""
     return format(time.total_seconds() / 3600, '.2f')
 
+def stylized_timedelta(time):
+    """Convert timedelta to a more stylized output."""
+    return f"{time.days} days, {time.seconds // 3600} hours, and {time.seconds % 3600 // 60} minutes"
 
 def main():
     """Run the analyzer."""
