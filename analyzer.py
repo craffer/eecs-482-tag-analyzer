@@ -62,7 +62,11 @@ def main():
     for session in coding_sessions:
         total_time += session
 
-    print(f"Total time spent coding: {total_time} ({total_time.total_seconds() / 3600:.2f} hours)")
+    time_days = f"{total_time.days} days, {total_time.seconds // 3600} hours, " + \
+                f"and {total_time.seconds % 3600 // 60} minutes"
+    time_hours = f"{total_time.total_seconds() / 3600:.2f}"
+
+    print(f"\nTotal time spent coding: {time_days} ({time_hours} hours)")
 
 
 if __name__ == "__main__":
