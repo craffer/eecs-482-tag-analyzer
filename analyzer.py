@@ -41,6 +41,7 @@ def main():
             print(line)
             sys.exit(1)
 
+    # we aren't sure if it is possible for tags to be out of order, so this is just a precaution
     compile_times = sorted(compile_times)
     coding_sessions = []
 
