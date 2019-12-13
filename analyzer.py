@@ -68,10 +68,16 @@ def main():
 
     total_time = sum(coding_sessions, datetime.timedelta())
     max_time = max(coding_sessions)
+    mean_time = total_time / len(coding_sessions)
+    median_time = sorted(coding_sessions.copy())[len(coding_sessions) // 2]
+    total_elapsed = compile_times[-1] - compile_times[0]
 
-    print(f"Total time spent coding: {total_time} ({total_time.total_seconds() / 3600:.2f} hours)")
-    print(f"Max time spent coding in a single session: {max_time} ({max_time.total_seconds() / 3600:.2f} hours)")
-    print(f"Max time spent between sessions: {max_break} ({max_break.total_seconds() / 3600:.2f} hours)")
+    print(f"\nTotal time spent coding: {total_time} ({get_hours(total_time)} hours)")
+    print(f"Max time spent coding in a single session: {max_time} ({get_hours(max_time)} hours)")
+    print(f"Mean time spent coding per session: {mean_time} ({get_hours(mean_time)} hours)")
+    print(f"Median time spent coding per session: {median_time} ({get_hours(median_time)} hours)")
+    print(f"Max time spent between sessions: {max_break} ({get_hours(max_break)} hours)")
+    print(f"Total time between start and end of project: {total_elapsed} ({get_hours(total_elapsed)} hours)\n")
 
 
 if __name__ == "__main__":
