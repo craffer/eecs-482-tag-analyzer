@@ -96,7 +96,7 @@ def main():
     mean_time = total_time / len(coding_sessions)
     median_time = sorted(coding_sessions.copy())[len(coding_sessions) // 2]
     total_elapsed = compile_times[-1] - compile_times[0]
-    percent_coding = total_elapsed / total_time
+    percent_coding = total_time / total_elapsed
 
     print_metric("\nTotal time spent coding", total_time)
     print("")
@@ -106,7 +106,7 @@ def main():
     print_metric("Longest break between sessions", max_break)
     print_metric("Total time between start/end of project", total_elapsed)
     print(f"Percentage of your life spent coding in between when you started and when you " +
-          f"finished: {percent_coding:.2f}%\n")
+          f"finished: {percent_coding * 100:.2f}%\n")
 
 
 if __name__ == "__main__":
