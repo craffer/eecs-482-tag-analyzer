@@ -15,9 +15,13 @@ def get_repo():
     return args.repo_url
 
 
-def get_datetime(line):
+def get_datetime(line, line_type):
     """Convert compilation git tag to the date and time of the compilation."""
-    rgx = r"refs\/tags\/compile-(\d{4}\.\d{2}\.\d{2}_\d{2}\.\d{2}\.\d{2})"
+    rgx = ""
+    if line_type == "compile":
+        rgx = r"refs\/tags\/compile-(\d{4}\.\d{2}\.\d{2}_\d{2}\.\d{2}\.\d{2})"
+    elif line_type == "submission":
+        rgx = r"refs\/tags\/submission-(\d{4}\.\d{2}\.\d{2}_\d{2}\.\d{2}\.\d{2})"
     date_str = re.search(rgx, line).group(1)
     if not date_str:
         raise Exception('get_datetime failed')
@@ -55,27 +59,32 @@ def main():
     tags = command_result.stdout
 
     compile_times = []
+    submission_times = []
 
     # convert the file into a list of compilation times that Python can understand
     for line in tags.splitlines():
         if 'refs/tags/compile-' in line:
             try:
-                compile_times.append(get_datetime(line.strip()))
+                compile_times.append(get_datetime(line.strip(), "compile"))
             except Exception:
                 print(f"{repo} isn't valid. Try again.")
                 sys.exit(1)
         elif 'refs/tags/submission-' in line:
-            # do nothing for now
-            pass
+            try:
+                submission_times.append(get_datetime(line.strip(), "submission"))
+            except Exception:
+                print(f"{repo} isn't valid. Try again.")
+                sys.exit(1)
         elif line != "":
             print(f"{repo} isn't valid. Try again.")
             sys.exit(1)
 
     # we aren't sure if it is possible for tags to be out of order, so this is just a precaution
     compile_times = sorted(compile_times)
+    submission_times = sorted(submission_times)
     coding_sessions = []
 
-    if len(compile_times) == 0:
+    if len(compile_times) == 0 or len(submission_times) == 0:
         print(f"Something went wrong. Try again.")
         sys.exit(1)
 
@@ -105,7 +114,7 @@ def main():
     max_time = max(coding_sessions)
     mean_time = total_time / len(coding_sessions)
     median_time = sorted(coding_sessions.copy())[len(coding_sessions) // 2]
-    total_elapsed = compile_times[-1] - compile_times[0]
+    total_elapsed = submission_times[-1] - compile_times[0]
     percent_coding = total_time / total_elapsed
 
     print_metric("\nTotal time spent coding", total_time)
