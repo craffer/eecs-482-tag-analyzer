@@ -114,7 +114,8 @@ def main():
     max_time = max(coding_sessions)
     mean_time = total_time / len(coding_sessions)
     median_time = sorted(coding_sessions.copy())[len(coding_sessions) // 2]
-    total_elapsed = submission_times[-1] - compile_times[0]
+    # it's possible that people submitted before compiling (test cases maybe?)
+    total_elapsed = submission_times[-1] - min(compile_times[0], submission_times[0])
     percent_coding = total_time / total_elapsed
 
     print_metric("\nTotal time spent coding", total_time)
